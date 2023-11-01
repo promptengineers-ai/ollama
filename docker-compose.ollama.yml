@@ -1,0 +1,26 @@
+version: '3'
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+volumes:
+  ollama:
+
+############################################################
+## Pull Model
+############################################################
+# curl -X POST http://localhost:11434/api/pull -d '{
+#   "name": "llama2:7b"
+# }'
+
+############################################################
+## Query the model
+############################################################
+# curl -X POST http://localhost:11434/api/generate -d '{
+#   "model": "llama2",
+#   "prompt":"Why is the sky blue?"
+# }'
