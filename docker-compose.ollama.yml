@@ -1,14 +1,18 @@
 version: '3'
 services:
   ollama:
-    image: ollama/ollama
     container_name: ollama
-    ports:
-      - "11434:11434"
+    image: ollama/ollama
     volumes:
-      - ollama:/root/.ollama
-volumes:
-  ollama:
+      - ./docker/ollama:/ollama  # Mount the directory containing entrypoint.sh
+    ports:
+      - 11434:11434
+    entrypoint: ["/ollama/entrypoint.sh"]  # Specify the entrypoint script
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
 
 ############################################################
 ## Pull Model
